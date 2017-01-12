@@ -12,6 +12,13 @@ module DiscourseSitepointApi
       render json: {users: users}, status: 200
     end
 
+    # TODO only for staging testing - remove this after the fact!
+    def staging_email_tokens
+      user = User.find_by(email: params[:email])
+      user.email_tokens.each { |t| t.destroy }
+      render json: {email: user.email, email_tokens: user.reload.email_tokens}
+    end
+
   end
 end
 
