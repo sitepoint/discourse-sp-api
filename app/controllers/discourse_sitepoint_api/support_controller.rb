@@ -18,9 +18,7 @@ module DiscourseSitepointApi
       # Purge staff_notes and start the import from scratch
       PluginStoreRow.where(plugin_name: "staff_notes").destroy_all
 
-      if Rails.env != "production"
-        UserCustomField.where(name: "staff_notes_count").destroy_all
-      end
+      UserCustomField.where(name: "staff_notes_count").destroy_all
 
       # Import legacy profile_notes
       PluginStoreRow.where(plugin_name: "profile_notes").find_each do |row|
